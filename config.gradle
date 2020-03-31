@@ -9,8 +9,8 @@ ext {
             versionName      : "1.1",
     ]
 
-    retrofit_version = '2.5.0'
-    okhttp_version = '3.4.1'
+    retrofit_version = '2.8.1'
+    okhttp_version = '3.12.0'
     rx_kotlin_version = '2.3.0'
     rx_android_version = '2.1.1'
     anko_version = '0.10.5'
