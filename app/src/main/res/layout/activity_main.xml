@@ -5,6 +5,11 @@
         <variable
             name="model"
             type="com.example.myapp.vm.AnimalViewModel" />
+
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,7 +26,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:textSize="18sp"
-            android:textColor="@color/black"
             android:text="@{model.info}"/>
 
         <Button
@@ -30,8 +34,23 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:textSize="18sp"
-            android:textColor="@color/black"
             android:onClick="@{() -> model.shot()}"/>
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{listener}"
+            android:text="请求数据" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="fjdfj kl}" />
+
 
     </LinearLayout>
 

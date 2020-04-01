@@ -1,13 +1,17 @@
 package com.wjx.android.wanandroidmvvm.base.https
 
+import android.util.Log
 import com.example.myapp.common.Constant
 import com.example.myapp.common.SPreference
+import com.google.gson.Gson
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.StringBuilder
+import java.util.concurrent.TimeUnit
 
 /**
  * Created with Android Studio.
@@ -18,104 +22,68 @@ import java.lang.StringBuilder
  */
 
 class RetrofitFactory private constructor() {
-    private val retrofit : Retrofit
+    private val retrofit: Retrofit
 
-    fun <T> create(clazz: Class<T>) : T {
-        return retrofit.create(clazz)
-    }
 
     init {
+
+        val gson = Gson().newBuilder()
+            .setLenient()
+            .serializeNulls()
+            .create()
+
         retrofit = Retrofit.Builder()
-            .baseUrl("https://www.wanandroid.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(initOkHttpClient())
+            .baseUrl("https://www.wanandroid.com/")
+            .client(initOkhttpClient())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+
     }
+
 
     companion object {
-        val instance by lazy {
+        val instance: RetrofitFactory by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             RetrofitFactory()
         }
+
     }
 
-    private fun initOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(initCookieIntercept())
-            .addInterceptor(initLoginIntercept())
-            .addInterceptor(initCommonInterceptor())
+
+    private fun initOkhttpClient(): OkHttpClient {
+
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .addInterceptor(initLogInterceptor())
             .build()
+
+
+        return okHttpClient
     }
 
-    private fun initCookieIntercept(): Interceptor {
-        return Interceptor { chain ->
-            val request = chain.request()
-            val response = chain.proceed(request)
-            val requestUrl = request.url().toString()
-            val domain = request.url().host()
-            //只保存登录或者注册
-            if(requestUrl.contains(Constant.SAVE_USER_LOGIN_KEY) || requestUrl.contains(Constant.SAVE_USER_REGISTER_KEY)){
-                val mCookie = response.headers(Constant.SET_COOKIE_KEY)
-                mCookie?.let {
-                    saveCookie(domain,parseCookie(it))
-                }
+
+    /*
+    * 日志拦截器
+    * */
+    private fun initLogInterceptor(): HttpLoggingInterceptor {
+
+        val interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                Log.i("Retrofit", message)
             }
-            response
-        }
+        })
+
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        return interceptor
     }
 
-    //自动登录
-    private fun initLoginIntercept(): Interceptor {
-        return Interceptor { chain ->
-            val request = chain.request()
-            val builder = request.newBuilder()
-            val domain = request.url().host()
 
-            if(domain.isNotEmpty()){
-                val mCookie by SPreference(domain,"")
-                if(mCookie.isNotEmpty()){
-                    builder.addHeader(Constant.COOKIE_NAME,mCookie)
-                }
-            }
-            val response = chain.proceed(builder.build())
-            response
-        }
-    }
+    /*
+    * 具体服务实例化
+    * */
+    fun <T> getService(service: Class<T>): T {
 
-    private fun initCommonInterceptor(): Interceptor {
-        return Interceptor { chain ->
-            val request = chain.request()
-                .newBuilder()
-                .addHeader("Content-Type", "application/json")
-                .addHeader("charset", "UTF-8")
-                .build()
-
-            chain.proceed(request)
-        }
-    }
-
-    private fun parseCookie(it: List<String>): String {
-        if(it.isEmpty()){
-            return ""
-        }
-
-        val stringBuilder = StringBuilder()
-
-        it.forEach { cookie ->
-            stringBuilder.append(cookie).append(";")
-        }
-
-        if(stringBuilder.isEmpty()){
-            return ""
-        }
-        //末尾的";"去掉
-        return stringBuilder.deleteCharAt(stringBuilder.length - 1).toString()
-    }
-
-    private fun saveCookie(domain: String?, parseCookie: String) {
-        domain?.let {
-            var resutl :String by SPreference(it,parseCookie)
-            resutl = parseCookie
-        }
+        return retrofit.create(service)
     }
 }

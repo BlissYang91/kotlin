@@ -9,6 +9,7 @@ android {
 
     compileSdkVersion rootAndroidId.compileSdkVersion
     buildToolsVersion rootAndroidId.buildToolsVersion
+
     defaultConfig {
         applicationId appId.app
         minSdkVersion rootAndroidId.minSdkVersion

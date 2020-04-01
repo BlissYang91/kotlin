@@ -1,5 +1,7 @@
 package com.wjx.android.wanandroidmvvm.base.https
 
+import com.example.myapp.bean.BaseResp
+import com.example.myapp.bean.WBean
 import com.wjx.android.wanandroidmvvm.ui.account.data.LoginResponse
 import com.wjx.android.wanandroidmvvm.ui.account.data.RegisterResponse
 import io.reactivex.Observable
@@ -16,30 +18,10 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-//    @POST("/user/login")
-//   fun onLogin(
-//        @Query("username") username: String,
-//        @Query("password") password: String
-//    ): Observable<BaseResponse<LoginResponse>>
-
-
-//    @POST("/user/register")
-//    fun onRegister(
-//        @Query("username") username: String, @Query("password") password: String,
-//        @Query("repassword") repassword: String
-//    ): Observable<BaseResponse<RegisterResponse>>
-
-    @POST("/user/login")
-   suspend fun onLogin(
-        @Query("username") username: String,
-        @Query("password") password: String
-    ): BaseResponse<LoginResponse>
-
-    @POST("/user/register")
-    suspend fun onRegister(
-        @Query("username") username: String, @Query("password") password: String,
-        @Query("repassword") repassword: String
-    ): BaseResponse<RegisterResponse>
-
+    /**
+     * 使用协程进行网络请求
+     */
+    @GET("article/top/json/")
+    suspend fun getTopArticle(): BaseResp<List<WBean>>
 
 }

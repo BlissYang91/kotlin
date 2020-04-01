@@ -10,7 +10,7 @@ ext {
     ]
 
     retrofit_version = '2.8.1'
-    okhttp_version = '3.12.0'
+    okhttp_version = '4.2.0'
     rx_kotlin_version = '2.3.0'
     rx_android_version = '2.1.1'
     anko_version = '0.10.5'
@@ -54,36 +54,16 @@ ext {
             "okhttp3-logging-interceptor": "com.squareup.okhttp3:logging-interceptor:${okhttp_version}",
             "rxkotlin"                   : "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version",
             "rxandroid"                  : "io.reactivex.rxjava2:rxandroid:$rx_android_version",
-            "v4_anko"                    : "org.jetbrains.anko:anko-support-v4-commons:$anko_version",
-            "anko"                       : "org.jetbrains.anko:anko-commons:$anko_version",
-            "loadSir"                    : "com.kingja.loadsir:loadsir:$loadSir_version",
             "lifecycle"                  : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
             "glide"                      : "com.github.bumptech.glide:glide:$glide_version",
             "banner"                     : "com.youth.banner:banner:$banner_version",
-            "agentweb"                   : "com.just.agentweb:agentweb:$agentweb_version",
-            "room"                       : "androidx.room:room-runtime:$room_version",
-            "license-fragment"           : "com.mikepenz:aboutlibraries:$about_fragment_version",
             "defaultlifecycleobserver"   : "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version",
             "lifecycle-viewmodel"        : "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version",
             "lifecycler-livedata"        : "androidx.lifecycle:lifecycle-livedata:$lifecycle_version",
             "lifecycle-viewmodel-ktx"    : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
             "lifecycle-runtime-ktx"      : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
             "lifecycle-livedata-ktx"     : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
-            "event-bus"                  : "org.greenrobot:eventbus:$event_bus_version",
-            "coroutines"                 : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
-            "adapter_helper"             : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$adapter_helper_version",
             "material"                   : "com.google.android.material:material:1.1.0-alpha05",
-            "tab_layout"                 : "com.flyco.tablayout:FlycoTabLayout_Lib:$tab_layout_version",
-            "flexbox"                    : "com.google.android:flexbox:$flex_box_version",
-            "flow_layout"                : "com.hyman:flowlayout-lib:$flow_layout_version",
-            "float_button"               : "com.getbase:floatingactionbutton:$float_button_version",
-            "lottie"                     : "com.airbnb.android:lottie:$lottie_version",
-            "preference"                 : "androidx.preference:preference:$preference_version",
-            "material_dialog"            : "com.afollestad.material-dialogs:core:$material_dialog_version",
-            "materiaal_dialog_color"     : "com.afollestad.material-dialogs:color:$material_dialog_color_version",
-            "litepal"                    : "org.litepal.android:kotlin:$litepal_version",
-            "circular_avatar"            : "com.github.wangjianxiandev:CircularAvatar:$circular_avatar",
-            "easypermissions"            : "pub.devrel:easypermissions:$easypermissions_version"
     ]
 
     processor = [
