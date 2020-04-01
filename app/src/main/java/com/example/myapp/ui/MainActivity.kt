@@ -40,11 +40,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.btn ->  netViewModel.getTopArticle()
             }
         }
-//        btn.setOnClickListener(object : View.OnClickListener {
-//            override fun onClick(v: View?) {
-//                netViewModel.getTopArticle()
-//            }
-//        })
 //        数据变化更新UI,livedata的数据被观察
         netViewModel.list.observe(this, Observer {
             tv.text = Gson().toJson(it)
