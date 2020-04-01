@@ -14,13 +14,10 @@ import java.lang.StringBuilder
 import java.util.concurrent.TimeUnit
 
 /**
- * Created with Android Studio.
- * Description:
- * @author: Wangjianxian
- * @date: 2020/02/24
- * Time: 16:56
+ * @Author yangtianfu
+ * @CreateTime 2020/4/1 21:17
+ * @Describe  retrofit封装类
  */
-
 class RetrofitFactory private constructor() {
     private val retrofit: Retrofit
 

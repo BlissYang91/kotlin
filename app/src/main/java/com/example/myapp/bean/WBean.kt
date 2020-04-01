@@ -3,7 +3,7 @@ package com.example.myapp.bean
 /**
  * @Author yangtianfu
  * @CreateTime 2020/4/1 18:13
- * @Describe
+ * @Describe 单个数据返回实体类
  */
 data class WBean(
     val apkLink: String,

@@ -1,12 +1,7 @@
 package com.example.myapp.vm
 
-import android.widget.Toast
 import androidx.databinding.ObservableField
-import androidx.lifecycle.MutableLiveData
-import com.example.myapp.R
 import com.example.myapp.bean.Animal
-import com.wjx.android.wanandroidmvvm.base.https.BaseResponse
-import com.wjx.android.wanandroidmvvm.ui.account.data.LoginResponse
 
 /**
  * @Author yangtianfu
@@ -25,8 +20,6 @@ class AnimalViewModel(val animal: Animal)  {
         info.set("${animal.name} 叫了 ${animal.shoutCount}声..")
     }
 
-    //使用协程请求网络
-    val mLoginData : MutableLiveData<BaseResponse<LoginResponse>> = MutableLiveData()
 
 
 }
