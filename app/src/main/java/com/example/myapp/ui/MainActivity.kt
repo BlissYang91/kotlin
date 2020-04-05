@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var netViewModel:NetViewMoudle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView<ActivityMainBinding>(this,R.layout.activity_main)
+        mBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         var animal = Animal("dog",0)
         mViewMode = AnimalViewModel(animal)
         mBinding.model = mViewMode //model指代xml xml中 name="model"的VM对象

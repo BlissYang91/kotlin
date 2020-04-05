@@ -1,5 +1,10 @@
 package com.example.myapp.ext
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import com.example.myapp.bean.BaseResp
 
 /**
@@ -14,4 +19,18 @@ fun <T> BaseResp<T>.dataConvert(): T {
     } else {
         throw Exception(errorMsg)
     }
+}
+
+/**
+ * 全局toast
+ */
+fun Context.toast(msg: String) {
+    Toast.makeText(this, msg,  LENGTH_SHORT).show()
+}
+
+/**
+ * 全局跳转
+ */
+fun Activity.openActivity(cls: Class<*>) {
+    startActivity(Intent(this, cls))
 }
